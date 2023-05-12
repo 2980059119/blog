@@ -1,0 +1,137 @@
+<template>
+  <header>
+    <div class="background_picture">
+      <div class="background_img">
+        <div class="header_title">
+          <h1 class="header_h1 ">
+            <a href="" rel="">IKUN 的个人博客</a>
+          </h1>
+          <h2 class="header_intro header_intro_title">但行好事莫问前程</h2>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="main-inner">
+      <div class="content-wrap">
+
+        <article v-for="i in 3" :key="i">
+          <PostBlock></PostBlock>
+        </article>
+      </div>
+    </div>
+  </main>
+</template>
+<script>
+// eslint-disable-next-line no-unused-vars
+import PostBlock from "@/views/postblock/index.vue";
+
+export default {
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: 'Index',
+  // eslint-disable-next-line vue/no-unused-components
+  components: {PostBlock},
+  data() {
+    return {}
+  },
+  methods: {
+    //定义数据获取方法
+    handleResize() {
+    }
+  },
+  //两个生命周期中监听窗口大小变化
+  //参数1：监听的事件
+  //参数2：一个回调函数，用于赋值
+  created() {
+  },
+  beforeUnmount() {
+  }
+}
+</script>
+<style lang="less" scoped>
+// 配置背景图片
+.background_picture {
+  //固定外层盒子，不受其他盒子影响
+  //放在最底层
+  width: 100%;
+  height: 50vh;
+  position: relative;
+  z-index: 1;
+
+  .background_img {
+    //这里外层盒子已经固定定位了，其实可以不加定位
+    position: absolute;
+    background-image: url(@/assets/image/index.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    //保证盒子始终在窗口中心
+    background-position: center center;
+    //避免窗口周围留白
+    width: 100%;
+    height: 100%;
+
+    .header_title {
+      position: relative;
+      align-items: center;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 1;
+
+      .header_h1 {
+        letter-spacing: -1px;
+        font-weight: 700;
+        font-size: 50px;
+        text-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+        -webkit-animation: fade-in-down 1s both;
+        animation: fade-in-down 1s both;
+        -webkit-animation-delay: .5s;
+        animation-delay: .5s;
+      }
+
+      .header_h1 a {
+        color: #fff;
+      }
+
+      .header_intro_title {
+        font-size: 20px;
+        font-weight: 400;
+      }
+
+      .header_intro {
+        margin-top: 10px;
+        color: rgba(255, 255, 255, .8);
+        line-height: 24px;
+        text-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+        -webkit-animation: fade-in-down .9s both;
+        animation: fade-in-down .9s both;
+        -webkit-animation-delay: .3s;
+        animation-delay: .3s;
+      }
+    }
+  }
+}
+
+.content-wrap {
+  background: #fff;
+  border-radius: initial;
+  box-shadow: initial;
+  box-sizing: border-box;
+  float: right;
+  min-height: 700px;
+  padding: 40px;
+  width: calc(100% - 252px);
+}
+
+.main-inner {
+  margin: 0 auto;
+  width: calc(100% - 20px);
+}
+
+@media (min-width: 1200px) {
+  .main-inner {
+    width: 1160px;
+  }
+}
+</style>
