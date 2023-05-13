@@ -14,11 +14,11 @@
 <script>
 import {mavonEditor} from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
-import postHeader from '@/views/posts/postHeader/index.vue'
+import postHeader from '@/views/tools/postHeader/index.vue'
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: "Article",
+  name: "Preview",
   components: {mavonEditor, postHeader},
   props: {
     info: {
@@ -31,12 +31,12 @@ export default {
             isTop: false,
             createDate: '1970-01-01',
             textNumber: '0',
-            infoType: []
+            categories: []
           }
         }
       },
       validator(value) {
-        return ['title', 'isTop', 'createDate', 'infoType', 'textNumber'].includes(value)
+        return ['title', 'isTop', 'createDate', 'categories', 'textNumber'].includes(value)
       }
     },
     content: {

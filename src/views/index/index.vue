@@ -18,12 +18,12 @@
 </template>
 <script>
 // eslint-disable-next-line no-unused-vars
-import preview from "@/views/mavonEditor/preview/index.vue";
-import common from "@/views/common/index.vue";
+import preview from "@/views/tools/mavonEditor/preview/index.vue";
+import common from "@/views/tools/common/index.vue";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: 'home',
+  name: 'index',
   // eslint-disable-next-line vue/no-unused-components
   components: {preview, common},
   data() {
@@ -34,7 +34,7 @@ export default {
             title: '文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2',
             isTop: true,
             createDate: '2021-07-19',
-            infoType: ['爬虫', '抓包'],
+            categories: ['爬虫', '抓包'],
             textNumber: '11k',
           },
           content: "文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空文章内容为空"
@@ -43,21 +43,21 @@ export default {
           info: {
             title: '文章标题2',
             isTop: true,
-            createDate: '2021-07-19',
-            infoType: ['爬虫', '抓包'],
-            textNumber: '11k',
+            createDate: '2021-47-19',
+            categories: ['爬虫f', '抓包s'],
+            textNumber: '1dk',
           },
-          content: "文章内容为空"
+          content: "文章内内容为空容为空"
         },
         {
           info: {
             title: '文章标题2',
             isTop: true,
-            createDate: '2021-07-19',
-            infoType: ['爬虫', '抓包'],
-            textNumber: '11k',
+            createDate: '2021-17-19',
+            categories: ['爬d虫', '抓d包'],
+            textNumber: '1k',
           },
-          content: "文章内容为空"
+          content: "文章内内容为空容为空"
         }
       ],
       single_page_hide: true,

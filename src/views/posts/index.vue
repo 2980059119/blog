@@ -6,12 +6,12 @@
   </div>
 </template>
 <script>
-import common from "@/views/common/index.vue";
-import preview from "@/views/mavonEditor/preview/index.vue";
+import common from "@/views/tools/common/index.vue";
+import preview from "@/views/tools/mavonEditor/preview/index.vue";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: "index",
+  name: "Posts",
   components: {
     // eslint-disable-next-line vue/no-unused-components
     common, preview
@@ -23,7 +23,7 @@ export default {
           title: '文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2文章标题2',
           isTop: true,
           createDate: '2021-07-19',
-          infoType: ['爬虫', '抓包'],
+          categories: ['爬虫', '抓包'],
           textNumber: '11k',
         },
         content: "### 项目结构\n" +

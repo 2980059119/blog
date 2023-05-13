@@ -37,12 +37,12 @@
                 <span>{{ Info.text_number ? Info.textNumber : '0' }}</span>
             </span>
       <br>
-      <span class="post-meta-item post-meta-type" v-show="Info.infoType">
+      <span class="post-meta-item post-meta-type" v-show="Info.categories">
                 <el-icon>
                     <Folder/>
                 </el-icon>
                 <span class="post-meta-item-text">分类于</span>
-                <span v-for="(type,index) in Info.infoType" :key="index" class="post-meta-class">
+                <span v-for="(type,index) in Info.categories" :key="index" class="post-meta-class">
                     <a href="">
                         <span>{{ type }}</span>
                     </a>
@@ -57,7 +57,7 @@
 <script>
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: "index",
+  name: "PostHeader",
   props: {
     info: {
       required: true,
@@ -69,12 +69,12 @@ export default {
             isTop: false,
             createDate: '1970-01-01',
             textNumber: '0',
-            infoType: []
+            categories: []
           },
         }
       },
       validator(value) {
-        return ['title', 'isTop', 'createDate', 'infoType', 'textNumber'].includes(value)
+        return ['title', 'isTop', 'createDate', 'categories', 'textNumber'].includes(value)
       }
     }
   },

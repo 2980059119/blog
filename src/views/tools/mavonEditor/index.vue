@@ -9,7 +9,7 @@ import 'mavon-editor/dist/css/index.css'
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: 'Index',
+  name: 'MavonEditor',
   components: {
     mavonEditor
   },
