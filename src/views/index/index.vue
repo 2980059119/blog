@@ -18,7 +18,7 @@
 </template>
 <script>
 // eslint-disable-next-line no-unused-vars
-import preview from "@/views/editor/preview/index.vue";
+import preview from "@/views/mavonEditor/preview/index.vue";
 import common from "@/views/common/index.vue";
 
 export default {

@@ -7,7 +7,7 @@
 </template>
 <script>
 import common from "@/views/common/index.vue";
-import preview from "@/views/editor/preview/index.vue";
+import preview from "@/views/mavonEditor/preview/index.vue";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
