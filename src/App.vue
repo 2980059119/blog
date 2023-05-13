@@ -1,5 +1,5 @@
 <template>
-  <router-view/>
+    <router-view/>
 </template>
 
 <style>
@@ -12,6 +12,13 @@
   color: #2c3e50;
 }
 
+#particles-js {
+  width: 100%;
+  height: calc(100% - 100px);
+  position: absolute;
+  /*overflow: hidden;*/
+  z-index: -1111;
+}
 nav {
   padding: 30px;
 }

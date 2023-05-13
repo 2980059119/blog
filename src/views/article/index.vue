@@ -1,10 +1,10 @@
 <template>
-  <div class="post-block">
-    <header class="post-header">
-      <h1 class="post-title">
-        <a href="" class="post-title-link">{{ posts.title ? posts.title : '文章为空' }}</a>
-      </h1>
-      <div class="post-meta">
+    <div class="post-block">
+      <header class="post-header">
+        <h1 class="post-title">
+          <a href="" class="post-title-link">{{ posts.title ? posts.title : '文章为空' }}</a>
+        </h1>
+        <div class="post-meta">
             <span class="post-meta-item" v-show="posts.isTop">
                 <span class="post-meta-item-icon">
                     <el-icon>
@@ -16,7 +16,7 @@
                                   border-color="#dcdcdc"/>
             </span>
 
-        <span class="post-meta-item">
+          <span class="post-meta-item">
                 <el-icon>
                     <Calendar/>
                 </el-icon>
@@ -26,7 +26,7 @@
                   }}</time>
             </span>
 
-        <span class="post-meta-item" title="本文字数">
+          <span class="post-meta-item" title="本文字数">
                 <el-divider direction="vertical" border-style="dashed"
                             border-color="#dcdcdc"/>
                 <span class="post-meta-item-icon">
@@ -37,8 +37,8 @@
                 <span class="post-meta-item-text">本文字数：</span>
                 <span>{{ posts.text_number ? posts.text_number : '0' }}</span>
             </span>
-        <br>
-        <span class="post-meta-item post-meta-type" v-show="posts.posts_type">
+          <br>
+          <span class="post-meta-item post-meta-type" v-show="posts.posts_type">
                 <el-icon>
                     <Folder/>
                 </el-icon>
@@ -50,19 +50,18 @@
                 </span>
 
             </span>
+        </div>
+      </header>
+      <div class="post-body" itemprop="articleBody">
+        <p>{{ posts.text_body ? posts.text_body : '文章内容为空' }}</p>
+        <el-button :icon="Search">阅读原文
+          <el-icon>
+            <DArrowRight/>
+          </el-icon>
+        </el-button>
+        <el-divider class="post-divider" border-style="dashed"/>
       </div>
-    </header>
-    <div class="post-body" itemprop="articleBody">
-      <p>{{ posts.text_body ? posts.text_body : '文章内容为空' }}</p>
-      <el-button :icon="Search">阅读原文
-        <el-icon>
-          <DArrowRight/>
-        </el-icon>
-      </el-button>
-      <el-divider class="post-divider" border-style="dashed"/>
     </div>
-  </div>
-
 </template>
 
 <script>
