@@ -13,7 +13,7 @@
           </div>
         </div>
       </el-header>
-      <el-container style="margin: 20px auto 40px;width: 70%;">
+      <el-container class="main">
         <el-aside width="240px">
           <div class="header-inner">
             <div class="site-brand-wrapper">
@@ -33,10 +33,9 @@
                       </el-image>
                     </a>
                   </span>
-                  <span class="site-title">IKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUN</span>
+                  <span class="site-title">dddd</span>
                 </div>
-                <p class="site-subtitle">IKUN
-                  的个人博客IKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUNIKUN</p>
+                <p class="site-subtitle">ddddd</p>
               </div>
 
               <div class="site-state motion-element">
@@ -130,14 +129,7 @@
           <el-main>
             <div class="main-inner">
               <div class="content-wrap">
-                <section id="posts" class="posts-expand">
-                  <article v-for="(posts , index) in content" :key="index"
-                           :class="[index===content.length?'last-posts':'']">
-                    <Article :posts="posts"></Article>
-                  </article>
-                  <el-pagination background pager-count="3" :hide-on-single-page="single_page_hide"
-                                 layout="prev, pager, next" :total="100"/>
-                </section>
+                <slot></slot>
               </div>
             </div>
           </el-main>
@@ -148,62 +140,18 @@
   </div>
 </template>
 <script>
-// eslint-disable-next-line no-unused-vars
-import Article from "@/views/article/index.vue";
-
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: 'Index',
-  // eslint-disable-next-line vue/no-unused-components
-  components: {Article},
-  data() {
-    return {
-      content: [
-        {
-          title: '文章标题1',
-          isTop: true,
-          createDate: '2021-07-19',
-          posts_type: ['爬虫', '抓包'],
-          text_body: '文章内容',
-          text_number: '11k',
-        },
-        {
-          title: '文章标题2',
-          isTop: true,
-          createDate: '2021-07-19',
-          posts_type: ['爬虫', '抓包'],
-          text_body: '文章内容',
-          text_number: '11k',
-        },
-        {
-          title: '文章标题3',
-          isTop: true,
-          createDate: '2021-07-19',
-          posts_type: ['爬虫', '抓包'],
-          text_body: '文章内容',
-          text_number: '11k',
-        }
-      ],
-      single_page_hide: true,
-    }
-  },
-  methods: {
-    //定义数据获取方法
-    handleResize() {
-    }
-  },
-  //两个生命周期中监听窗口大小变化
-  //参数1：监听的事件
-  //参数2：一个回调函数，用于赋值
-  created() {
-  },
-  beforeUnmount() {
-  }
+  name: 'common',
 }
 </script>
 <style lang="less" scoped>
-
 .common-layout {
+  .main {
+    width: 75%;
+    margin: 50px auto;
+  }
+
   .el-header {
     --el-header-padding: 0;
     --el-header-height: 100%;
@@ -273,8 +221,6 @@ export default {
   }
 
   .el-aside {
-    margin-top: 20px;
-    margin-top: 10px;
     padding: 10px;
 
     .header-inner {
@@ -302,6 +248,10 @@ export default {
                 margin: 0 auto 5px;
                 display: block;
                 transition: all .3s ease-out;
+
+                .image-slot {
+                  background: #00000000;
+                }
               }
 
               .site-logo-img:hover {
@@ -390,7 +340,7 @@ export default {
               display: block;
               //font-size: 0.8125em;
               box-sizing: border-box;
-              line-height: 35px;
+              line-height: 24px;
               padding: 5px 10px;
               position: relative;
               text-align: left;
@@ -425,12 +375,14 @@ export default {
 
   .el-main {
 
+    --el-main-padding: 10px;
+
     .main-inner {
       .content-wrap {
         background: #fff;
         padding: 40px;
         border-radius: 15px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        box-shadow: 0 1px 13px 0 rgba(0, 0, 0, 0.2), 0 4px 6px 0 rgba(0, 0, 0, 0.19);
 
         .el-divider--horizontal {
           width: 100%;
@@ -446,23 +398,10 @@ export default {
   }
 }
 
-
-@media (min-width: 1200px) {
-  .main-inner {
-    //width: 1160px;
-  }
-}
-
-.site-logo-img .image-slot {
-  background: #00000000;
-}
-
-</style>
-<style>
-
 .last-posts .post-divider {
   width: 100% !important;
   --el-border-style: double !important;
   margin: 40px auto 0 !important;
 }
+
 </style>
