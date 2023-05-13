@@ -11,28 +11,58 @@
       </div>
     </div>
   </header>
+
   <main>
     <div class="main-inner">
       <div class="content-wrap">
-
-        <article v-for="i in 3" :key="i">
-          <PostBlock></PostBlock>
-        </article>
+        <section id="posts" class="posts-expand">
+          <article v-for="(posts , index) in content" :key="index" :class="[index===content.length?'last-posts':'']">
+            <Article :posts="posts"></Article>
+          </article>
+        </section>
       </div>
     </div>
   </main>
 </template>
 <script>
 // eslint-disable-next-line no-unused-vars
-import PostBlock from "@/views/postblock/index.vue";
+import Article from "@/views/article/index.vue";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Index',
   // eslint-disable-next-line vue/no-unused-components
-  components: {PostBlock},
+  components: {Article},
   data() {
-    return {}
+    return {
+      content: [
+        {
+          title: '文章标题1',
+          isTop: true,
+          createDate: '2021-07-19',
+          posts_type: ['爬虫', '抓包'],
+          text_body: '文章内容',
+          text_number: '11k',
+        },
+        {
+          title: '文章标题2',
+          isTop: true,
+          createDate: '2021-07-19',
+          posts_type: ['爬虫', '抓包'],
+          text_body: '文章内容',
+          text_number: '11k',
+        },
+        {
+          title: '文章标题3',
+          isTop: true,
+          createDate: '2021-07-19',
+          posts_type: ['爬虫', '抓包'],
+          text_body: '文章内容',
+          text_number: '11k',
+        }
+      ],
+      test: 1,
+    }
   },
   methods: {
     //定义数据获取方法
@@ -113,25 +143,43 @@ export default {
   }
 }
 
-.content-wrap {
-  background: #fff;
-  border-radius: initial;
-  box-shadow: initial;
-  box-sizing: border-box;
-  float: right;
-  min-height: 700px;
-  padding: 40px;
-  width: calc(100% - 252px);
-}
-
 .main-inner {
   margin: 0 auto;
   width: calc(100% - 20px);
+
+  .content-wrap {
+    background: #fff;
+    box-sizing: border-box;
+    float: right;
+    min-height: 700px;
+    padding: 40px;
+    width: calc(100% - 252px);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    .el-divider--horizontal {
+      width: 100%;
+      margin: 30px auto;
+    }
+  }
+}
+
+main {
+  margin: 40px 0;
 }
 
 @media (min-width: 1200px) {
   .main-inner {
     width: 1160px;
   }
+}
+
+
+</style>
+<style>
+
+.last-posts .post-divider {
+  width: 100% !important;
+  --el-border-style: double !important;
+  margin: 40px auto 0 !important;
 }
 </style>
