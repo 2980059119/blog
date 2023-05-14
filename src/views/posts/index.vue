@@ -2,7 +2,7 @@
   <div class="main">
     <common>
       <template v-slot:content>
-        <editorPreview :Info="post.info" :content="post.content"></editorPreview>
+        <editorPreview :posts-info="post.info" :posts-content="post.content"></editorPreview>
       </template>
     </common>
   </div>

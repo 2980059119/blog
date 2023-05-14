@@ -1,12 +1,12 @@
 <template>
   <div class="post-block">
-    <postHeader :info="Info"/>
+    <postHeader :posts-info="PostsInfo"/>
     <div class="post-body">
       <mavon-editor :toolbarsFlag="false" defaultOpen="preview" :subfield="false" :ishljs="true" :boxShadow="false"
                     :autofocus="false" boxShadowStyle="none" :transition="false"
                     placeholder="文本为空"
                     :shortCut="false"
-                    previewBackground="#ffffff00" :editable="false" v-model="Content"/>
+                    previewBackground="#ffffff00" :editable="false" v-model="PostsContent"/>
     </div>
   </div>
 </template>
@@ -20,12 +20,12 @@ export default {
   name: "editorPreview",
   components: {mavonEditor, postHeader},
   props: {
-    Info: {
+    postsInfo: {
       required: true,
       type: Object,
       default() {
         return {
-          info: {
+          postsInfo: {
             title: '文章为空',
             isTop: false,
             createDate: '1970-01-01',
@@ -38,16 +38,15 @@ export default {
         return ['title', 'isTop', 'createDate', 'categories', 'textNumber'].includes(value)
       }
     },
-    content: {
+    postsContent: {
       required: true,
       type: String,
     },
   },
   data() {
     return {
-      // eslint-disable-next-line vue/no-dupe-keys
-      Info: this.info,
-      Content: this.content
+      PostsInfo: this.postsInfo,
+      PostsContent: this.postsContent
     }
   },
 }

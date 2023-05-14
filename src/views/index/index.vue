@@ -4,7 +4,7 @@
       <template v-slot:content>
         <div v-for="(post , index) in posts" :key="index"
              :class="index===posts.length - 1?'last-posts':''">
-          <editorPreview :Info="post.info" :content="post.content"></editorPreview>
+          <editorPreview :posts-info="post.info" :posts-content="post.content"></editorPreview>
           <el-button @click="jump()" :icon="Search">阅读原文
             <el-icon>
               <DArrowRight/>

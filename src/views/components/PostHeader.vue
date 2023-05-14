@@ -1,10 +1,10 @@
 <template>
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">
-      <a href="" class="post-title-link">{{ Info.title ? Info.title : '文章为空' }}</a>
+      <a href="" class="post-title-link">{{ PostsInfo.title ? PostsInfo.title : '文章为空' }}</a>
     </h1>
     <div class="post-meta">
-            <span class="post-meta-item" v-show="Info.isTop">
+            <span class="post-meta-item" v-show="PostsInfo.isTop">
                 <span class="post-meta-item-icon">
                     <el-icon>
                         <Promotion style="width: 1em; height: 1em;"/>
@@ -20,8 +20,8 @@
                     <Calendar/>
                 </el-icon>
                 <span class="post-meta-item-text">发表于</span>
-                <time :title="`创建时间${Info.createDate ? Info.createDate : '1970-01-01'}`">{{
-                    Info.createDate ? Info.createDate : '1970-01-01'
+                <time :title="`创建时间${PostsInfo.createDate ? PostsInfo.createDate : '1970-01-01'}`">{{
+                    PostsInfo.createDate ? PostsInfo.createDate : '1970-01-01'
                   }}</time>
             </span>
 
@@ -34,17 +34,17 @@
                     </el-icon>
                 </span>
                 <span class="post-meta-item-text">本文字数：</span>
-                <span>{{ Info.text_number ? Info.textNumber : '0' }}</span>
+                <span>{{ PostsInfo.textNumber ? PostsInfo.textNumber : '0' }}</span>
             </span>
       <br>
-      <span class="post-meta-item post-meta-type" v-show="Info.categories">
+      <span class="post-meta-item post-meta-type" v-show="PostsInfo.categories">
                 <el-icon>
                     <Folder/>
                 </el-icon>
                 <span class="post-meta-item-text">分类于</span>
-                <span v-for="(type,index) in Info.categories" :key="index" class="post-meta-class">
+                <span v-for="(categories,index) in PostsInfo.categories" :key="index" class="post-meta-class">
                     <a href="">
-                        <span>{{ type }}</span>
+                        <span>{{ categories }}</span>
                     </a>
                 </span>
 
@@ -58,12 +58,12 @@
 export default {
   name: "PostHeader",
   props: {
-    info: {
+    postsInfo: {
       required: true,
       type: Object,
       default() {
         return {
-          info: {
+          postsInfo: {
             title: '文章为空',
             isTop: false,
             createDate: '1970-01-01',
@@ -79,7 +79,7 @@ export default {
   },
   data() {
     return {
-      Info: this.info,
+      PostsInfo: this.postsInfo,
     }
   },
 }
