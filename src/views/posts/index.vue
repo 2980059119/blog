@@ -1,21 +1,16 @@
 <template>
   <div class="main">
     <common>
-      <preview :info="post.info" :content="post.content"></preview>
+      <template v-slot:content>
+        <editorPreview :Info="post.info" :content="post.content"></editorPreview>
+      </template>
     </common>
   </div>
 </template>
 <script>
-import common from "@/views/tools/common/index.vue";
-import preview from "@/views/tools/mavonEditor/preview/index.vue";
-
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Posts",
-  components: {
-    // eslint-disable-next-line vue/no-unused-components
-    common, preview
-  },
   data() {
     return {
       post: {

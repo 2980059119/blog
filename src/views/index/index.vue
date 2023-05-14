@@ -1,31 +1,27 @@
 <template>
   <div class="main">
     <common>
-      <div v-for="(post , index) in posts" :key="index"
-           :class="index===posts.length - 1?'last-posts':''">
-        <preview :info="post.info" :content="post.content"></preview>
-        <el-button @click="jump()" :icon="Search">阅读原文
-          <el-icon>
-            <DArrowRight/>
-          </el-icon>
-        </el-button>
-        <el-divider class="post-divider" border-style="dashed"/>
-      </div>
-      <el-pagination background pager-count="3" :hide-on-single-page="single_page_hide"
-                     layout="prev, pager, next" :total="100"/>
+      <template v-slot:content>
+        <div v-for="(post , index) in posts" :key="index"
+             :class="index===posts.length - 1?'last-posts':''">
+          <editorPreview :Info="post.info" :content="post.content"></editorPreview>
+          <el-button @click="jump()" :icon="Search">阅读原文
+            <el-icon>
+              <DArrowRight/>
+            </el-icon>
+          </el-button>
+          <el-divider class="post-divider" border-style="dashed"/>
+        </div>
+        <el-pagination background pager-count="3" :hide-on-single-page="single_page_hide"
+                       layout="prev, pager, next" :total="100"/>
+      </template>
     </common>
   </div>
 </template>
 <script>
-// eslint-disable-next-line no-unused-vars
-import preview from "@/views/tools/mavonEditor/preview/index.vue";
-import common from "@/views/tools/common/index.vue";
-
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'index',
-  // eslint-disable-next-line vue/no-unused-components
-  components: {preview, common},
   data() {
     return {
       posts: [
@@ -68,13 +64,6 @@ export default {
       this.$router.push('/posts')
     }
 
-  },
-  //两个生命周期中监听窗口大小变化
-  //参数1：监听的事件
-  //参数2：一个回调函数，用于赋值
-  created() {
-  },
-  beforeUnmount() {
   }
 }
 </script>
