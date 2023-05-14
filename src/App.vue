@@ -1,6 +1,40 @@
 <template>
-    <router-view/>
+  <router-view/>
+  <div style="position: fixed; bottom: 0;z-index: 100;">
+    <live2d
+        :style="style"
+        :model="['Potion-Maker/Pio', 'school-2017-costume-yellow']"
+        :direction="direction"
+        :size="size"
+    ></live2d>
+  </div>
 </template>
+<script>
+
+import live2d from 'vue-live2d'
+
+export default {
+  name: 'App',
+  components: {
+    live2d
+  },
+  data() {
+    return {
+      direction: 'left',
+      style: '',
+      width: 500,
+      height: 500,
+      size: 250,
+      tips: {
+        mouseover: [{
+          selector: '.vue-live2d',
+          texts: ['这样可以修改默认语句']
+        }]
+      }
+    }
+  }
+}
+</script>
 
 <style>
 
@@ -19,6 +53,7 @@
   /*overflow: hidden;*/
   z-index: -1111;
 }
+
 nav {
   padding: 30px;
 }
@@ -37,5 +72,8 @@ a {
   text-decoration: none;
 }
 
+.vue-live2d-toggle[data-v-8f0d4038] {
+  width: 2.5rem;
+}
 
 </style>

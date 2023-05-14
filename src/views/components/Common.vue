@@ -1,5 +1,6 @@
 <template>
   <div class="common-layout">
+
     <el-container>
       <el-header>
         <div class="background_picture">
@@ -8,7 +9,10 @@
               <h1 class="header_h1 ">
                 <a href="" rel="">IKUN 的个人博客</a>
               </h1>
-              <h2 class="header_intro header_intro_title">但行好事莫问前程</h2>
+              <h2 class="header_intro header_intro_title">{{ typer.output }}<span class="animation"></span>
+              </h2>
+
+
             </div>
           </div>
         </div>
@@ -20,8 +24,8 @@
               <div class="site-meta">
                 <div class="custom-logo-site-title">
                   <span class="site-logo">
-                    <a href="" rel="start">
-                      <el-image class="site-logo-img" alt="D 的个人博客"
+                    <router-link to="/" rel="start">
+                      <el-image class="site-logo-img"
                                 src="https://b3logfile.com/avatar/1353745196354_1611386411315.jpeg?imageView2/1/w/128/h/128/interlace/0/q/100">
                           <template #placeholder>
                               <div class="image-slot"></div>
@@ -31,7 +35,7 @@
                           </div>
                         </template>
                       </el-image>
-                    </a>
+                    </router-link>
                   </span>
                   <span class="site-title">dddd</span>
                 </div>
@@ -40,69 +44,69 @@
 
               <div class="site-state motion-element">
                 <div class="site-state-item site-state-posts">
-                  <a href="/archives/">
+                  <router-link :to="{name: 'archives'}">
                     <span class="site-state-item-count">29</span>
                     <span class="site-state-item-name">日志</span>
-                  </a>
+                  </router-link>
                 </div>
                 <div class="site-state-item site-state-categories">
-                  <a href="/categories/">
+                  <router-link :to="{name:'categories'}">
                     <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">分类</span>
-                  </a>
+                  </router-link>
                 </div>
                 <div class="site-state-item site-state-tags">
-                  <a href="/tags/">
+                  <router-link to="tags">
                     <span class="site-state-item-count">71</span>
                     <span class="site-state-item-name">标签</span>
-                  </a>
+                  </router-link>
                 </div>
               </div>
             </div>
             <nav class="site-nav">
               <ul id="menu" class="menu">
                 <li class="menu-item menu-item-home">
-                  <a href="/" rel="section">
+                  <router-link to="/" rel="section">
                     <el-icon>
                       <HomeFilled/>
                     </el-icon>
                     首页
-                  </a>
+                  </router-link>
                 </li>
                 <li class="menu-item menu-item-tags">
-                  <a href="/tags/" rel="section">
+                  <router-link :to="{name: 'tags'}" rel="section">
                     <el-icon>
                       <PriceTag/>
                     </el-icon>
                     标签
                     <span class="badge">71</span>
-                  </a>
+                  </router-link>
                 </li>
                 <li class="menu-item menu-item-categories">
-                  <a href="/categories/" rel="section">
+                  <router-link :to="{name: 'categories'}" rel="section">
                     <el-icon>
                       <Menu/>
                     </el-icon>
                     分类
                     <span class="badge">16</span>
-                  </a>
+                  </router-link>
                 </li>
                 <li class="menu-item menu-item-archives">
-                  <a href="/archives/" rel="section">
+                  <router-link :to="{name: 'archives'}" rel="section">
                     <el-icon>
                       <Box/>
                     </el-icon>
                     归档
                     <span class="badge">29</span>
-                  </a>
+                  </router-link>
                 </li>
                 <li class="menu-item menu-item-about">
-                  <a href="/about/" rel="section">
+                  <router-link :to="{name: 'about'}" rel="section">
                     <el-icon>
                       <User/>
                     </el-icon>
                     关于
-                  </a>
+                  </router-link>
                 </li>
                 <li class="menu-item menu-item-search">
                   <a href="javascript:;" class="popup-trigger">
@@ -137,14 +141,62 @@
           </el-main>
           <el-footer>Footer</el-footer>
         </el-container>
+
       </el-container>
     </el-container>
+
   </div>
 </template>
 <script>
+import EasyTyper from "easy-typer-js";
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'common',
+  data() {
+    return {
+      typer: {
+        output: '',
+        isEnd: false,
+        speed: 80,
+        singleBack: false,
+        sleep: 0,
+        type: 'normal',
+        backSpeed: 40,
+        sentencePause: false
+      },
+    }
+  },
+  mounted() {
+    this.init()
+  },
+  methods: {
+    // 初始化
+    init() {
+      this.fetchData()
+    },
+    fetchData() {
+      // 一言Api进行打字机循环输出效果
+      fetch('https://v1.hitokoto.cn')
+          .then(res => {
+            console.log("res == " + res)
+            return res.json()
+          })
+          .then(({hitokoto}) => {
+            console.log("hitokoto == " + hitokoto)
+            this.initTyped(hitokoto)
+          })
+          .catch(err => {
+            this.initTyped("但行好事莫问前程")
+            console.error(err)
+          })
+    },
+    initTyped(input, fn, hooks) {
+      const typer = this.typer
+      // eslint-disable-next-line no-unused-vars
+      const typed = new EasyTyper(typer, input, fn, hooks)
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -152,6 +204,9 @@ export default {
   .main {
     width: 75%;
     margin: 50px auto;
+    position: relative;
+    z-index: 2;
+    min-width: 900px;
   }
 
   .el-header {
@@ -165,7 +220,8 @@ export default {
       height: 50vh;
       position: relative;
       z-index: 1;
-
+      min-height: 300px;
+      min-width: 900px;
       .background_img {
         //这里外层盒子已经固定定位了，其实可以不加定位
         position: absolute;
@@ -191,7 +247,7 @@ export default {
             letter-spacing: -1px;
             font-weight: 700;
             font-size: 50px;
-            text-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+            text-shadow: 0 3px 6px rgb(0 0 0 / 60%);
             -webkit-animation: fade-in-down 1s both;
             animation: fade-in-down 1s both;
             -webkit-animation-delay: .5s;
@@ -205,17 +261,44 @@ export default {
           .header_intro_title {
             font-size: 20px;
             font-weight: 400;
+
+            .animation::after {
+              content: '';
+              display: inline-block;
+              width: 1px;
+              height: 36%;
+              animation: blink 1s infinite steps(1, start)
+            }
+
+            @keyframes blink {
+              0% {
+                background-color: white;
+              }
+              50% {
+                background-color: rgba(0, 0, 0, 0);
+              }
+              100% {
+                background-color: white;
+              }
+            }
           }
 
           .header_intro {
-            margin-top: 10px;
+            margin:0;
             color: rgba(255, 255, 255, .8);
-            line-height: 24px;
+            line-height: 34px;
             text-shadow: 0 3px 6px rgba(0, 0, 0, .3);
             -webkit-animation: fade-in-down .9s both;
             animation: fade-in-down .9s both;
             -webkit-animation-delay: .3s;
             animation-delay: .3s;
+            width: 40%;
+            /*让长段文本不换行*/
+            white-space: nowrap;
+            /*设置文本超出元素宽度部分隐藏*/
+            overflow-x: hidden;
+            /*设置文本超出部分用省略号显示*/
+            text-overflow: ellipsis;
           }
         }
       }
@@ -224,11 +307,11 @@ export default {
 
   .el-aside {
     padding: 10px;
-
+    height: 100%;
     .header-inner {
       background: #fff;
       border-radius: 15px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 6px 6px 6px -2px rgba(0, 0, 0, 0.19);
 
       .site-brand-wrapper {
         background: #000 url(@/assets/images/side-bg.jpg) top/contain no-repeat;
@@ -406,4 +489,7 @@ export default {
   margin: 40px auto 0 !important;
 }
 
+nav a.router-link-exact-active {
+  color: #ff4400;
+}
 </style>

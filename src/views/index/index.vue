@@ -75,7 +75,7 @@ export default {
 }
 
 .post-divider {
-  width: 7%;
+  width: 50%;
   margin: 30px auto;
 }
 

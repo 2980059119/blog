@@ -1,7 +1,7 @@
 <template>
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">
-      <a href="" class="post-title-link">{{ PostsInfo.title ? PostsInfo.title : '文章为空' }}</a>
+      <router-link to="/" class="post-title-link">{{ PostsInfo.title ? PostsInfo.title : '文章为空' }}</router-link>
     </h1>
     <div class="post-meta">
             <span class="post-meta-item" v-show="PostsInfo.isTop">

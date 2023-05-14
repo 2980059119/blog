@@ -28,6 +28,17 @@ const routes = [
         name: 'archives',
         component: () => import( '../views/archives/index.vue')
 
+    }, {
+        path: '/tags',
+        name: 'tags',
+        component: () => import( '../views/tags/index.vue')
+
+    }
+    , {
+        path: '/test',
+        name: 'test',
+        component: () => import( '../views/test/index.vue')
+
     }
 ]
 
