@@ -58,7 +58,6 @@ export default {
   .post-body {
     p {
       line-height: 28px;
-      text-indent: 2em;
       color: #7a7a7a;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -87,7 +86,6 @@ h1 {
   padding: 0 !important;
 
   p {
-    text-indent: 2em;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

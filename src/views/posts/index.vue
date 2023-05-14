@@ -75,7 +75,6 @@ export default {
   padding: 0 !important;
 
   p {
-    text-indent: 2em;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

@@ -1,6 +1,6 @@
 <template>
-  <div class="common-layout">
 
+  <div class="common-layout">
     <el-container>
       <el-header>
         <div class="background_picture">
@@ -144,8 +144,8 @@
 
       </el-container>
     </el-container>
-
   </div>
+
 </template>
 <script>
 import EasyTyper from "easy-typer-js";
@@ -165,6 +165,7 @@ export default {
         backSpeed: 40,
         sentencePause: false
       },
+      loading: true,
     }
   },
   mounted() {
@@ -200,6 +201,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+
 .common-layout {
   .main {
     width: 75%;
@@ -207,6 +209,8 @@ export default {
     position: relative;
     z-index: 2;
     min-width: 900px;
+    display: flex;
+
   }
 
   .el-header {
@@ -222,6 +226,7 @@ export default {
       z-index: 1;
       min-height: 300px;
       min-width: 900px;
+
       .background_img {
         //这里外层盒子已经固定定位了，其实可以不加定位
         position: absolute;
@@ -284,7 +289,7 @@ export default {
           }
 
           .header_intro {
-            margin:0;
+            margin: 0;
             color: rgba(255, 255, 255, .8);
             line-height: 34px;
             text-shadow: 0 3px 6px rgba(0, 0, 0, .3);
@@ -308,6 +313,7 @@ export default {
   .el-aside {
     padding: 10px;
     height: 100%;
+
     .header-inner {
       background: #fff;
       border-radius: 15px;
