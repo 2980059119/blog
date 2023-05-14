@@ -128,7 +128,9 @@
               </div>
             </nav>
           </div>
-
+          <div class="header-inner" style="margin-top: 20px">
+            <slot name="aside"></slot>
+          </div>
         </el-aside>
         <el-container>
           <el-main>
@@ -145,14 +147,23 @@
       </el-container>
     </el-container>
   </div>
-
+  <div style="position: fixed; bottom: 0;z-index: 100;">
+    <live2d
+        :style="style"
+        :model="['Potion-Maker/Pio', 'school-2017-costume-yellow']"
+        :direction="direction"
+        :size="size"
+    ></live2d>
+  </div>
 </template>
 <script>
 import EasyTyper from "easy-typer-js";
+import live2d from 'vue-live2d'
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'common',
+  components: {live2d},
   data() {
     return {
       typer: {
@@ -180,11 +191,9 @@ export default {
       // 一言Api进行打字机循环输出效果
       fetch('https://v1.hitokoto.cn')
           .then(res => {
-            console.log("res == " + res)
             return res.json()
           })
           .then(({hitokoto}) => {
-            console.log("hitokoto == " + hitokoto)
             this.initTyped(hitokoto)
           })
           .catch(err => {
@@ -318,7 +327,7 @@ export default {
       background: #fff;
       border-radius: 15px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 6px 6px 6px -2px rgba(0, 0, 0, 0.19);
-
+      overflow: hidden;
       .site-brand-wrapper {
         background: #000 url(@/assets/images/side-bg.jpg) top/contain no-repeat;
         width: 100%;

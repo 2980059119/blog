@@ -104,7 +104,7 @@ export default {
     .post-title-link {
       border-bottom: none;
       color: #555;
-      //display: inline-block;
+      display: contents;
       line-height: 1.5;
       position: relative;
 

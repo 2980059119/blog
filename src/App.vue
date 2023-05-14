@@ -1,23 +1,11 @@
 <template>
   <router-view/>
-  <div style="position: fixed; bottom: 0;z-index: 100;">
-    <live2d
-        :style="style"
-        :model="['Potion-Maker/Pio', 'school-2017-costume-yellow']"
-        :direction="direction"
-        :size="size"
-    ></live2d>
-  </div>
+
 </template>
 <script>
 
-import live2d from 'vue-live2d'
-
 export default {
   name: 'App',
-  components: {
-    live2d
-  },
   data() {
     return {
       direction: 'left',

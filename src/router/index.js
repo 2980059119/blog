@@ -33,11 +33,15 @@ const routes = [
         name: 'tags',
         component: () => import( '../views/tags/index.vue')
 
-    }
-    , {
+    }, {
         path: '/test',
         name: 'test',
         component: () => import( '../views/test/index.vue')
+
+    }, {
+        path: '/review',
+        name: 'review',
+        component: () => import( '../views/components/Review.vue')
 
     }
 ]
