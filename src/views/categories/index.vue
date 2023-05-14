@@ -11,7 +11,6 @@
           </ul>
         </div>
       </template>
-
     </common>
   </div>
 </template>
@@ -90,12 +89,7 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  font-weight: 700;
-  margin: initial;
-  text-align: center;
-  font-size: 32px;
-}
+
 
 .category-all {
   width: fit-content;

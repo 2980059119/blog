@@ -7,7 +7,7 @@
           <div class="background_img">
             <div class="header_title">
               <h1 class="header_h1 ">
-                <a href="" rel="">IKUN 的个人博客</a>
+                <router-link to="/" href="" rel="">IKUN 的个人博客</router-link>
               </h1>
               <h2 class="header_intro header_intro_title">{{ typer.output }}<span class="animation"></span>
               </h2>
