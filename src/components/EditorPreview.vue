@@ -1,12 +1,12 @@
 <template>
   <div class="post-block">
-    <postHeader :posts-info="PostsInfo"/>
+    <postHeader :posts-info="info"/>
     <div class="post-body">
       <mavon-editor :toolbarsFlag="false" defaultOpen="preview" :subfield="false" :ishljs="true" :boxShadow="false"
                     :autofocus="false" boxShadowStyle="none" :transition="false"
                     placeholder="文本为空"
                     :shortCut="false"
-                    previewBackground="#ffffff00" :editable="false" v-model="PostsContent"/>
+                    previewBackground="#ffffff00" :editable="false" v-model="content"/>
     </div>
   </div>
 </template>
@@ -14,39 +14,60 @@
 <script>
 import {mavonEditor} from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
-import postHeader from '@/views/components/PostHeader.vue'
+import postHeader from '@/components//PostHeader.vue'
 
 export default {
   name: "editorPreview",
   components: {mavonEditor, postHeader},
   props: {
-    postsInfo: {
+    posts: {
       required: true,
       type: Object,
       default() {
         return {
-          postsInfo: {
+          posts: {
+            // 标题
             title: '文章为空',
-            isTop: false,
-            createDate: '1970-01-01',
-            textNumber: '0',
-            categories: []
+            // 是否置顶
+            top: false,
+            // 发布时间
+            date: '1970-01-01',
+            // 文章字数
+            wordCount: '0',
+            // 文章
+            content: '',
+            // 文章摘要
+            excerpt: '',
+            // 文章别名
+            alias: '',
+            // 点赞量
+            favorite: '',
+            // 标签列表
+            tagList: [],
+            // 分类列表
+            categoriesList: [],
           }
         }
       },
-      validator(value) {
-        return ['title', 'isTop', 'createDate', 'categories', 'textNumber'].includes(value)
-      }
     },
     postsContent: {
       required: true,
       type: String,
     },
   },
+  watch: {
+    postsContent(newValue, oldValue) {
+      this.content = newValue
+    },
+    posts(newValue, oldValue) {
+      this.info = newValue
+    }
+  },
   data() {
     return {
-      PostsInfo: this.postsInfo,
-      PostsContent: this.postsContent
+      info: this.posts,
+      content: this.postsContent
+
     }
   },
 }

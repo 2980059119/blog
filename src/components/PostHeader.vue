@@ -4,7 +4,7 @@
       <router-link to="/" class="post-title-link">{{ PostsInfo.title ? PostsInfo.title : '文章为空' }}</router-link>
     </h1>
     <div class="post-meta">
-            <span class="post-meta-item" v-show="PostsInfo.isTop">
+            <span class="post-meta-item" v-show="PostsInfo.top">
                 <span class="post-meta-item-icon">
                     <el-icon>
                         <Promotion style="width: 1em; height: 1em;"/>
@@ -20,8 +20,8 @@
                     <Calendar/>
                 </el-icon>
                 <span class="post-meta-item-text">发表于</span>
-                <time :title="`创建时间${PostsInfo.createDate ? PostsInfo.createDate : '1970-01-01'}`">{{
-                    PostsInfo.createDate ? PostsInfo.createDate : '1970-01-01'
+                <time :title="`创建时间${PostsInfo.date ? PostsInfo.date : '1970-01-01'}`">{{
+                    PostsInfo.date ? PostsInfo.date : '1970-01-01'
                   }}</time>
             </span>
 
@@ -34,15 +34,15 @@
                     </el-icon>
                 </span>
                 <span class="post-meta-item-text">本文字数：</span>
-                <span>{{ PostsInfo.textNumber ? PostsInfo.textNumber : '0' }}</span>
+                <span>{{ PostsInfo.wordCount ? PostsInfo.wordCount : '0' }}</span>
             </span>
       <br>
-      <span class="post-meta-item post-meta-type" v-show="PostsInfo.categories">
+      <span class="post-meta-item post-meta-type" v-show="PostsInfo.categoriesList">
                 <el-icon>
                     <Folder/>
                 </el-icon>
                 <span class="post-meta-item-text">分类于</span>
-                <span v-for="(categories,index) in PostsInfo.categories" :key="index" class="post-meta-class">
+                <span v-for="(categories,index) in PostsInfo.categoriesList" :key="index" class="post-meta-class">
                     <a href="">
                         <span>{{ categories }}</span>
                     </a>
@@ -64,18 +64,35 @@ export default {
       default() {
         return {
           postsInfo: {
+            // 标题
             title: '文章为空',
-            isTop: false,
-            createDate: '1970-01-01',
-            textNumber: '0',
-            categories: []
+            // 是否置顶
+            top: false,
+            // 发布时间
+            date: '1970-01-01',
+            // 文章字数
+            wordCount: '0',
+            // 文章
+            content: '',
+            // 文章摘要
+            excerpt: '',
+            // 文章别名
+            alias: '',
+            // 点赞量
+            favorite: '',
+            // 标签列表
+            tagList: [],
+            // 分类列表
+            categoriesList: [],
           },
         }
       },
-      validator(value) {
-        return ['title', 'isTop', 'createDate', 'categories', 'textNumber'].includes(value)
-      }
     }
+  },
+  watch: {
+    postsInfo(newValue, oldValue) {
+      this.PostsInfo = newValue
+    },
   },
   data() {
     return {

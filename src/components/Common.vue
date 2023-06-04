@@ -147,23 +147,23 @@
       </el-container>
     </el-container>
   </div>
-  <div style="position: fixed; bottom: 0;z-index: 100;">
-    <live2d
-        :style="style"
-        :model="['Potion-Maker/Pio', 'school-2017-costume-yellow']"
-        :direction="direction"
-        :size="size"
-    ></live2d>
-  </div>
+  <!--<div style="position: fixed; bottom: 0;z-index: 100;">-->
+  <!--  <live2d-->
+  <!--      :style="style"-->
+  <!--      :model="['Potion-Maker/Pio', 'school-2017-costume-yellow']"-->
+  <!--      :direction="direction"-->
+  <!--      :size="size"-->
+  <!--  ></live2d>-->
+  <!--</div>-->
 </template>
 <script>
 import EasyTyper from "easy-typer-js";
-import live2d from 'vue-live2d'
+// import live2d from 'vue-live2d'
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'common',
-  components: {live2d},
+  // components: {live2d},
   data() {
     return {
       typer: {

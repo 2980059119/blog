@@ -8,8 +8,8 @@
             <h5 class="tag-cloud-title">目前共计 {{ tags.length }} 个标签</h5>
             <div class="tag-cloud-tags">
               <router-link to="/" v-for="(tag,index) in tags" :key="index"
-                           :class="tag.tagNumber>1?tag.tagNumber>3?'tag-cloud-one':'tag-cloud-two':''">
-                {{ tag.title }}
+                           :class="tag.articleNum>1?tag.articleNum>3?'tag-cloud-one':'tag-cloud-two':''">
+                {{ tag.tagName }}
               </router-link>
             </div>
           </div>
@@ -20,39 +20,25 @@
 </template>
 
 <script>
+import tag from "@/api/tag";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Tags",
   data() {
     return {
-      tags: [
-        {title: "807", tagNumber: 3},
-        {title: "HttpCanary", tagNumber: 1},
-        {title: "JavaScript", tagNumber: 2},
-        {title: "centos", tagNumber: 4},
-        {title: "centos", tagNumber: 4},
-        {title: "807", tagNumber: 3},
-        {title: "centos", tagNumber: 4},
-        {title: "807", tagNumber: 3},
-        {title: "centos", tagNumber: 4},
-        {title: "JavaScript", tagNumber: 2},
-        {title: "centos", tagNumber: 4},
-        {title: "HttpCanary", tagNumber: 1},
-        {title: "centos", tagNumber: 4},
-        {title: "HttpCanary", tagNumber: 1},
-        {title: "centos", tagNumber: 4},
-        {title: "centos", tagNumber: 4},
-        {title: "JavaScript", tagNumber: 2},
-        {title: "centos", tagNumber: 4},
-        {title: "HttpCanary", tagNumber: 1},
-        {title: "centos", tagNumber: 4},
-        {title: "centos", tagNumber: 4},
-        {title: "JavaScript", tagNumber: 2},
-        {title: "centos", tagNumber: 4},
-        {title: "HttpCanary", tagNumber: 1},
-        {title: "centos", tagNumber: 4},
-        {title: "centos", tagNumber: 4},
-      ]
+      tags: []
+    }
+  },
+  created(){
+    this.selectAll()
+  },
+  methods:{
+    selectAll(){
+      tag.selectAll().then((result) => {
+        this.tags = result
+      }).catch((err) => {
+        console.log(err)
+      });
     }
   }
 }

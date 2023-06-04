@@ -1,6 +1,6 @@
 <template>
   <li class="categories">
-    <a class="category-list-link">{{ sourceItem.title }}({{ sourceItem.articlesNumber }})</a>
+    <a class="category-list-link">{{ sourceItem.name }}({{ sourceItem.articlesNumber }})</a>
     <ul v-if="sourceItem.children" class="categories-item">
       <categories-item
           v-for="(item,index) in sourceItem.children"
