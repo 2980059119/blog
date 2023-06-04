@@ -5,7 +5,7 @@
         <div v-loading="loading">
           <div v-for="(post , index) in posts.records" :key="index"
                :class="index===posts.records.length - 1?'last-posts':''">
-            <editorPreview :posts="post" :posts-content="post.excerpt"></editorPreview>
+            <editorPreview :posts="post" :posts-content="post.excerpt" :navigation="false"></editorPreview>
             <el-button @click="alias(post.alias)">阅读原文
               <el-icon>
                 <DArrowRight/>

@@ -54,7 +54,6 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to)
   if (to.matched.length === 0) {  // 如果未匹配到路由
     from.name ? next({ name: from.name }) : next('/404')
   } else {

@@ -26,7 +26,7 @@
                   <span class="site-logo">
                     <router-link to="/" rel="start">
                       <el-image class="site-logo-img"
-                                src="https://b3logfile.com/avatar/1353745196354_1611386411315.jpeg?imageView2/1/w/128/h/128/interlace/0/q/100">
+                                src="http://192.168.146.110:9000/images/2023-06/04/832ea0501db345bea30a790661c11ac5.jpg">
                           <template #placeholder>
                               <div class="image-slot"></div>
                             </template>

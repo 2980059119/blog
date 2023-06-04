@@ -90,7 +90,7 @@ export default {
     }
   },
   watch: {
-    postsInfo(newValue, oldValue) {
+    postsInfo(newValue) {
       this.PostsInfo = newValue
     },
   },

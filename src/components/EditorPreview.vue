@@ -1,12 +1,19 @@
 <template>
   <div class="post-block">
-    <postHeader :posts-info="info"/>
+    <postHeader :posts-info="posts"/>
     <div class="post-body">
-      <mavon-editor :toolbarsFlag="false" defaultOpen="preview" :subfield="false" :ishljs="true" :boxShadow="false"
-                    :autofocus="false" boxShadowStyle="none" :transition="false"
+      <mavon-editor ref="md"
+                    v-model="content"
+                    :subfield="false"
+                    defaultOpen="preview"
+                    :editable="false"
+                    :toolbarsFlag="false"
+                    previewBackground="#00000000"
+                    :boxShadow="false"
                     placeholder="文本为空"
-                    :shortCut="false"
-                    previewBackground="#ffffff00" :editable="false" v-model="content"/>
+                    :navigation="navigation"
+                    class="mavon-editor"
+      />
     </div>
   </div>
 </template>
@@ -46,7 +53,9 @@ export default {
             tagList: [],
             // 分类列表
             categoriesList: [],
-          }
+            // 是否显示 目录
+            navigationShow: false
+          },
         }
       },
     },
@@ -54,20 +63,24 @@ export default {
       required: true,
       type: String,
     },
+    navigation: {
+      required: true,
+      type: Boolean,
+      default: false,
+    }
   },
   watch: {
-    postsContent(newValue, oldValue) {
-      this.content = newValue
-    },
-    posts(newValue, oldValue) {
-      this.info = newValue
+    postsContent(newValue) {
+      if (newValue) {
+        this.content = newValue
+      }
     }
   },
   data() {
     return {
-      info: this.posts,
-      content: this.postsContent
-
+      // info: this.posts,
+      content: this.postsContent,
+      loading: true
     }
   },
 }
@@ -105,14 +118,6 @@ h1 {
 <style lang="less">
 .v-show-content {
   padding: 0 !important;
-
-  p {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-height: 30px;
-  }
 }
+
 </style>
