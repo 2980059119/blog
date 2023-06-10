@@ -88,6 +88,7 @@ export default {
         this.posts = result
         this.loading = false
       }).catch((err) => {
+        console.log(err)
         this.$message.error(err);
       });
     },

@@ -1,4 +1,3 @@
-'use strict'
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
 
@@ -10,7 +9,6 @@ const name = defaultSettings.title // 网址标题
 const port = 8013 // 端口配置
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
-console.log(process.env.NODE_ENV)
 module.exports = {
   // hash 模式下可使用
   // publicPath: process.env.NODE_ENV === 'development' ? '/' : './',
@@ -21,7 +19,6 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     port: port,
-    open: false,
     proxy: {
       '/api': {
         changeOrigin: true,
@@ -44,14 +41,12 @@ module.exports = {
       fullInstall: true
     },
   },
-  configureWebpack: {
-    // provide the app's title in webpack's name field, so that
-    // it can be accessed in index.html to inject the correct title.
-    name: name,
-    resolve: {
-      alias: {
-        '@': resolve('src'),
-      }
-    },
-  },
+  chainWebpack: config => {
+    config
+      .plugin('html')
+      .tap(args => {
+        args[0].title = name
+        return args
+      })
+  }
 }

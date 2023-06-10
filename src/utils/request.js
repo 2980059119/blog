@@ -1,8 +1,8 @@
 import axios from 'axios'
 import router from '@/router/routers'
-import { ElNotification  } from 'element-plus'
+import {ElNotification} from 'element-plus'
 import store from '../store'
-import { getToken } from '@/utils/auth'
+import {getToken} from '@/utils/auth'
 import Config from '@/settings'
 import Cookies from 'js-cookie'
 
@@ -38,10 +38,10 @@ service.interceptors.response.use(
     if (error.response.data instanceof Blob && error.response.data.type.toLowerCase().indexOf('json') !== -1) {
       const reader = new FileReader()
       reader.readAsText(error.response.data, 'utf-8')
-      reader.onload = function(e) {
+      reader.onload = function (e) {
         console.log(e)
         const errorMsg = JSON.parse(reader.result).message
-        ElNotification .error({
+        ElNotification.error({
           title: errorMsg,
           duration: 5000
         })
@@ -52,7 +52,7 @@ service.interceptors.response.use(
         code = error.response.data.status
       } catch (e) {
         if (error.toString().indexOf('Error: timeout') !== -1) {
-          ElNotification .error({
+          ElNotification.error({
             title: '网络请求超时',
             duration: 5000
           })
@@ -60,25 +60,19 @@ service.interceptors.response.use(
         }
       }
       if (code) {
-        if (code === 401) {
-          store.dispatch('LogOut').then(() => {
-            // 用户登录界面提示
-            Cookies.set('point', 401)
-            location.reload()
-          })
-        } else if (code === 403) {
-          router.push({ path: '/401' })
+        if (code === 403) {
+          router.push({path: '/401'})
         } else {
           const errorMsg = error.response.data.message
           if (errorMsg !== undefined) {
-            ElNotification .error({
+            ElNotification.error({
               title: errorMsg,
               duration: 5000
             })
           }
         }
       } else {
-        ElNotification .error({
+        ElNotification.error({
           title: '接口请求失败',
           duration: 5000
         })
