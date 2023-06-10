@@ -1,6 +1,6 @@
 <template>
   <div class="common-layout">
-    <el-container>
+    <el-container :style="cssVars">
       <el-header>
         <div class="background_picture">
           <div class="background_img">
@@ -23,14 +23,13 @@
                   <span class="site-logo">
                     <router-link to="/" rel="start">
                       <el-image class="site-logo-img"
-                                src="http://192.168.146.110:9000/images/2023-06/04/832ea0501db345bea30a790661c11ac5.jpg">
+                                :src="info.avatar">
                           <template #placeholder>
-                              <div class="image-slot"></div>
-                            </template>
-                        <template #error>
-                          <div class="image-slot">
-                          </div>
-                        </template>
+                            <div class="image-slot"></div>
+                          </template>
+                          <template #error>
+                            <img :src="require('@/assets/images/ikun.jpg')" class="el-image__inner">
+                          </template>
                       </el-image>
                     </router-link>
                   </span>
@@ -136,7 +135,7 @@
 import EasyTyper from "easy-typer-js";
 // import live2d from 'vue-live2d'
 import posts from '@/api/posts';
-
+import request from '@/utils/request'
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'common',
@@ -202,14 +201,30 @@ export default {
         this.tag = result.tag
         this.info = result.info
       }).catch((err) => {
-        this.$message.error(err);
+        console.log(err)
       });
+    },
+  },
+  computed: {
+    cssVars() {
+      let background = this.info.background
+      let siteBg = this.info.siteBg
+      if(this.info.background){
+        background = 'url(' + this.info.background + ')'
+      }
+      if(this.info.siteBg){
+        siteBg = 'url(' + this.info.siteBg + ')'
+      }
+      return {
+        "--background": background,
+        "--siteBg": siteBg
+      };
     }
   }
 }
 </script>
 
-<style lang="less">
+<style lang="scss" >
 .common-layout {
   .main {
     width: 75%;
@@ -238,7 +253,7 @@ export default {
       .background_img {
         //这里外层盒子已经固定定位了，其实可以不加定位
         position: absolute;
-        background-image: url(@/assets/images/index.jpg);
+        background-image: var(--background, url('@/assets/images/index.jpg'));
         background-size: cover;
         background-repeat: no-repeat;
         //保证盒子始终在窗口中心
@@ -328,7 +343,10 @@ export default {
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 6px 6px 6px -2px rgba(0, 0, 0, 0.19);
       overflow: hidden;
       .site-brand-wrapper {
-        background: #000 url(@/assets/images/side-bg.jpg) top/contain no-repeat;
+        background-image: var(--siteBg, url('@/assets/images/side-bg.jpg'));
+        background-position: top;
+        background-size: contain;
+        background-repeat: no-repeat;
         width: 100%;
         height: 226px;
         padding-top: 40px;
@@ -485,7 +503,7 @@ export default {
         box-shadow: 0 1px 13px 0 rgba(0, 0, 0, 0.2), 0 4px 6px 0 rgba(0, 0, 0, 0.19);
 
         .el-divider--horizontal {
-          width: 100%;
+          width: 7%;
           margin: 30px auto;
         }
 
