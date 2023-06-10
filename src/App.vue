@@ -31,9 +31,6 @@ h1 {
   font-size: 32px;
 }
 
-p {
-  text-indent: 2em
-}
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

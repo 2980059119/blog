@@ -1,5 +1,4 @@
 <template>
-
   <div class="common-layout">
     <el-container>
       <el-header>
@@ -7,12 +6,10 @@
           <div class="background_img">
             <div class="header_title">
               <h1 class="header_h1 ">
-                <router-link to="/" href="" rel="">IKUN 的个人博客</router-link>
+                <router-link to="/" href="" rel="">{{ info.title }}</router-link>
               </h1>
               <h2 class="header_intro header_intro_title">{{ typer.output }}<span class="animation"></span>
               </h2>
-
-
             </div>
           </div>
         </div>
@@ -37,30 +34,9 @@
                       </el-image>
                     </router-link>
                   </span>
-                  <span class="site-title">dddd</span>
+                  <span class="site-title">{{ info.name }}</span>
                 </div>
-                <p class="site-subtitle">ddddd</p>
-              </div>
-
-              <div class="site-state motion-element">
-                <div class="site-state-item site-state-posts">
-                  <router-link :to="{name: 'archives'}">
-                    <span class="site-state-item-count">29</span>
-                    <span class="site-state-item-name">日志</span>
-                  </router-link>
-                </div>
-                <div class="site-state-item site-state-categories">
-                  <router-link :to="{name:'categories'}">
-                    <span class="site-state-item-count">16</span>
-                    <span class="site-state-item-name">分类</span>
-                  </router-link>
-                </div>
-                <div class="site-state-item site-state-tags">
-                  <router-link to="tags">
-                    <span class="site-state-item-count">71</span>
-                    <span class="site-state-item-name">标签</span>
-                  </router-link>
-                </div>
+                <p class="site-subtitle">{{ info.sign }}</p>
               </div>
             </div>
             <nav class="site-nav">
@@ -79,7 +55,7 @@
                       <PriceTag/>
                     </el-icon>
                     标签
-                    <span class="badge">71</span>
+                    <span class="badge">{{ tag }}</span>
                   </router-link>
                 </li>
                 <li class="menu-item menu-item-categories">
@@ -88,18 +64,18 @@
                       <Menu/>
                     </el-icon>
                     分类
-                    <span class="badge">16</span>
+                    <span class="badge">{{ categories }}</span>
                   </router-link>
                 </li>
-                <li class="menu-item menu-item-archives">
+                <!-- <li class="menu-item menu-item-archives">
                   <router-link :to="{name: 'archives'}" rel="section">
                     <el-icon>
                       <Box/>
                     </el-icon>
-                    归档
+                    文章
                     <span class="badge">29</span>
                   </router-link>
-                </li>
+                </li> -->
                 <li class="menu-item menu-item-about">
                   <router-link :to="{name: 'about'}" rel="section">
                     <el-icon>
@@ -159,6 +135,7 @@
 <script>
 import EasyTyper from "easy-typer-js";
 // import live2d from 'vue-live2d'
+import posts from '@/api/posts';
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -177,6 +154,18 @@ export default {
         sentencePause: false
       },
       loading: true,
+      article: 0,
+      tag: 0,
+      categories: 0,
+      info:{
+        "name": "ikun",
+        "title": "IKUN 的个人博客",
+        "sign": "天青色等烟雨，而我在等你",
+        "concerning": "菜鸡一枚",
+        "avatar": "",
+        "background": "",
+        "siteBg": ""
+      },
     }
   },
   mounted() {
@@ -185,6 +174,7 @@ export default {
   methods: {
     // 初始化
     init() {
+      this.selectData()
       this.fetchData()
     },
     fetchData() {
@@ -205,12 +195,21 @@ export default {
       const typer = this.typer
       // eslint-disable-next-line no-unused-vars
       const typed = new EasyTyper(typer, input, fn, hooks)
+    },
+    selectData(){
+      posts.selectData().then((result) => {
+        this.article = result.article
+        this.tag = result.tag
+        this.info = result.info
+      }).catch((err) => {
+        this.$message.error(err);
+      });
     }
   }
 }
 </script>
-<style lang="less" scoped>
 
+<style lang="less">
 .common-layout {
   .main {
     width: 75%;
@@ -331,7 +330,7 @@ export default {
       .site-brand-wrapper {
         background: #000 url(@/assets/images/side-bg.jpg) top/contain no-repeat;
         width: 100%;
-        height: 235px;
+        height: 226px;
         padding-top: 40px;
         border-radius: 15px;
 
@@ -384,11 +383,12 @@ export default {
             color: white;
             font-size: 14px;
             font-weight: initial;
-            margin: 0 30px;
+            margin: 0 25px;
             overflow: hidden;
-            white-space: nowrap;
             text-overflow: ellipsis;
-            -o-text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
           }
         }
 

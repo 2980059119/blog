@@ -34,7 +34,7 @@
                     </el-icon>
                 </span>
                 <span class="post-meta-item-text">本文字数：</span>
-                <span>{{ PostsInfo.wordCount ? PostsInfo.wordCount : '0' }}</span>
+                <span>{{ formatNumber(PostsInfo.wordCount ? PostsInfo.wordCount : '0') }}</span>
             </span>
       <br>
       <span class="post-meta-item post-meta-type" v-show="PostsInfo.categoriesList">
@@ -99,6 +99,11 @@ export default {
       PostsInfo: this.postsInfo,
     }
   },
+  methods:{
+    formatNumber(num) {
+      return (num / 1000).toFixed(1) + "k";
+    }
+  }
 }
 </script>
 

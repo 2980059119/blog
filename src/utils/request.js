@@ -11,7 +11,9 @@ const service = axios.create({
   baseURL: process.env.NODE_ENV === 'production' ? process.env.VUE_APP_BASE_API : '/', // api 的 base_url
   timeout: Config.timeout // 请求超时时间
 })
-
+console.log(service.getUri())
+console.log(process.env.NODE_ENV)
+console.log(process.env.VUE_APP_BASE_API)
 // request拦截器
 service.interceptors.request.use(
   config => {

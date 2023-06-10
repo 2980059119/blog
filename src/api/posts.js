@@ -10,10 +10,17 @@ export function selectOne(id) {
 
 export function selectAll(page) {
   return request({
-    url: `/api/posts`,
+    url: '/api/posts',
     method: 'get',
     params: page
   })
 }
 
-export default {selectAll, selectOne}
+export function selectData() {
+  return request({
+    url: '/api/posts/data',
+    method: 'get',
+  })
+}
+
+export default {selectData, selectAll, selectOne}
